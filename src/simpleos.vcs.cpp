@@ -8,13 +8,7 @@ void simpleos::version_control_system::newversion(string link, checksum256 check
     require_auth(_self);
 
     version_info_singl data(_self, _self.value);
-
-    version_info new_version_info = data.exists() ? data.get() : version_info{};
-    new_version_info.link = link;
-    new_version_info.checksum = checksum;
-    new_version_info.version_number = version_number;
-
-    data.set(new_version_info, _self);
+    data.set(version_info{link, checksum, version_number}, _self);
 }
 
 EOSIO_DISPATCH(simpleos::version_control_system, (newversion))
