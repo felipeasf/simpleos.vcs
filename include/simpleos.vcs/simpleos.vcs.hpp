@@ -1,34 +1,26 @@
 #pragma once
 
 #include <eosiolib/eosio.hpp>
-#include<eosiolib/singleton.hpp>
+#include <eosiolib/singleton.hpp>
 
 using namespace eosio;
 using namespace std;
 
-namespace simpleos { 
+namespace simpleos {
+    struct [[eosio::table("version.info"), eosio::contract("simpleos.vcs")]] version_info {
+        string link;
+        checksum256 checksum;
+        string version_number;
 
-	CONTRACT simpleos_vcs : public contract{
-	public:
+        EOSLIB_SERIALIZE(version_info, (link)(checksum)(version_number))
+    };
+    typedef singleton<name("version.info"), version_info> version_info_singl;
 
-		simpleos_vcs(name recvr, name code, datastream<const char*> ds);
+    class [[eosio::contract("simpleos.vcs")]] version_control_system : public contract {
+        public:
+            version_control_system(name recvr, name code, datastream<const char*> ds);
 
-		ACTION newversion(string link, uint64_t checksum, string nversion );
-
-	private:
-
-    	TABLE info { 
-        	string link;
-        	uint64_t checksum;
-        	string nversion;
-
-        EOSLIB_SERIALIZE(info, (link)(checksum)(nversion))
-    	};
-
-    typedef singleton<name("version"), info> version_singleton;
-    version_singleton _version;
-
-	};
+            [[eosio::action("newversion")]]
+            void newversion(string link, checksum256 checksum, string version_number);
+    };
 }//simpleos namespace
-
-EOSIO_DISPATCH(simpleos::simpleos_vcs, (newversion))
