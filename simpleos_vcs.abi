@@ -1,0 +1,62 @@
+{
+    "____comment": "This file was generated with eosio-abigen. DO NOT EDIT Thu Mar 14 17:40:22 2019",
+    "version": "eosio::abi/1.1",
+    "structs": [
+        {
+            "name": "info",
+            "base": "",
+            "fields": [
+                {
+                    "name": "link",
+                    "type": "string"
+                },
+                {
+                    "name": "checksum",
+                    "type": "uint64"
+                },
+                {
+                    "name": "nversion",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "newversion",
+            "base": "",
+            "fields": [
+                {
+                    "name": "link",
+                    "type": "string"
+                },
+                {
+                    "name": "checksum",
+                    "type": "uint64"
+                },
+                {
+                    "name": "nversion",
+                    "type": "string"
+                }
+            ]
+        }
+    ],
+    "types": [],
+    "actions": [
+        {
+            "name": "newversion",
+            "type": "newversion",
+            "ricardian_contract": ""
+        }
+    ],
+    "tables": [
+        {
+            "name": "info",
+            "type": "info",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        }
+    ],
+    "ricardian_clauses": [],
+    "variants": [],
+    "abi_extensions": []
+}
